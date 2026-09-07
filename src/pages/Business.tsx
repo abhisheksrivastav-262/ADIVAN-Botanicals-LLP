@@ -316,6 +316,18 @@ export function Founders() {
       text: "Supports the brand across wellness thinking, product development and brand building — nurturing the quality and care behind every Adivan product.",
     },
   ];
+  const messages = [
+    {
+      src: "/founders/founder-message-narayan-patel.jpg",
+      alt: "Public message from Founder Dr. Narayan Prasad Patel — Healthy People, Stronger India (Hindi)",
+      caption: "Founder's message — Dr. Narayan Prasad Patel",
+    },
+    {
+      src: "/founders/founder-message-hema-patel.jpg",
+      alt: "Public message from Co-Founder Dr. Hema Patel — Healthy Families, Happier Tomorrows (Hindi)",
+      caption: "Co-Founder's message — Dr. Hema Patel",
+    },
+  ];
   const commitments = [
     {
       title: "To Manufacturing Partners",
@@ -364,6 +376,35 @@ export function Founders() {
               </article>
             </Reveal>
           ))}
+        </div>
+
+        <div className="mt-16">
+          <SectionHead
+            eyebrow="In their own words"
+            title={
+              <>
+                Messages from our <span className="text-pine-700 italic">founders</span>
+              </>
+            }
+            align="center"
+          />
+          <div className="mt-10 grid gap-8 md:grid-cols-2">
+            {messages.map((m, i) => (
+              <Reveal key={m.src} delay={i * 120}>
+                <figure className="card-lift overflow-hidden rounded-[2rem] border border-pine-800/10 bg-cream p-4 sm:p-5">
+                  <img
+                    src={m.src}
+                    alt={m.alt}
+                    loading="lazy"
+                    className="h-auto w-full rounded-3xl object-contain"
+                  />
+                  <figcaption className="px-2 pt-4 pb-2 text-center font-display text-lg text-pine-800 italic">
+                    {m.caption}
+                  </figcaption>
+                </figure>
+              </Reveal>
+            ))}
+          </div>
         </div>
 
         <div className="mt-16">
