@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { CheckCircle2, Loader2, Send } from "lucide-react";
+import { CheckCircle2, Loader2, MessageCircle, Send } from "lucide-react";
 import { COMPANY } from "../data/site";
 import { PRODUCTS } from "../data/products";
 import { cn } from "../lib/cn";
@@ -18,21 +18,37 @@ interface Props {
   fields: FieldDef[];
   context: string;
   submitLabel?: string;
+  /** pre-filled values, e.g. the product name on a product detail page */
+  defaults?: Record<string, string>;
+}
+
+const WHATSAPP_NUMBER = "919977963311";
+
+function buildMessage(context: string, values: Record<string, string>): string {
+  const lines = ["Hello Adivan Botanicals LLP,"];
+  if (context.toLowerCase().includes("product")) {
+    lines.push("I am interested in your product.");
+  } else {
+    lines.push("I have sent an enquiry through your website.");
+  }
+  Object.entries(values).forEach(([label, value]) => {
+    const v = value.trim();
+    if (v) lines.push(`${label}: ${v}`);
+  });
+  lines.push("Please contact me regarding this enquiry.");
+  return lines.join("\n");
 }
 
 function buildWhatsAppLink(context: string, values: Record<string, string>): string {
-  const lines = [`Namaste! New ${context} — Adivan Botanicals website:`];
-  Object.entries(values).forEach(([k, v]) => {
-    if (v.trim()) lines.push(`${k}: ${v.trim()}`);
-  });
-  return `https://wa.me/919977963311?text=${encodeURIComponent(lines.join("\n"))}`;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildMessage(context, values))}`;
 }
 
-export default function EnquiryForm({ fields, context, submitLabel = "Send Enquiry" }: Props) {
-  const initial = Object.fromEntries(fields.map((f) => [f.label, ""]));
-  const [values, setValues] = useState<Record<string, string>>(initial);
+export default function EnquiryForm({ fields, context, submitLabel = "Send Enquiry", defaults = {} }: Props) {
+  const makeInitial = () => Object.fromEntries(fields.map((f) => [f.label, defaults[f.label] || ""]));
+  const [values, setValues] = useState<Record<string, string>>(makeInitial);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "blocked">("idle");
+  const [waLink, setWaLink] = useState<string>("");
 
   const set = (label: string, v: string) => {
     setValues((p) => ({ ...p, [label]: v }));
@@ -55,20 +71,31 @@ export default function EnquiryForm({ fields, context, submitLabel = "Send Enqui
     ev.preventDefault();
     if (status === "sending") return;
     if (!validate()) return;
+    // Build the complete WhatsApp message first, then open it in the
+    // submit handler itself so mobile/desktop popup blockers allow it.
+    const link = buildWhatsAppLink(context, values);
+    setWaLink(link);
     setStatus("sending");
+    const win = window.open(link, "_blank", "noopener");
     window.setTimeout(() => {
-      setStatus("sent");
-      setValues(initial);
-    }, 1100);
+      if (win) {
+        setStatus("sent");
+        setValues(makeInitial());
+      } else {
+        // Popup was blocked — do NOT show a fake success; ask the user
+        // to open WhatsApp manually with the same pre-filled message.
+        setStatus("blocked");
+      }
+    }, 600);
   };
 
-  if (status === "sent") {
+  if (status === "blocked") {
     return (
-      <div className="rounded-3xl border border-pine-700/20 bg-pine-50 p-10 text-center">
-        <CheckCircle2 className="mx-auto h-12 w-12 text-pine-700" />
-        <h3 className="mt-4 font-display text-2xl font-medium text-pine-950">Thank you — enquiry received</h3>
+      <div className="rounded-3xl border border-gold-500/50 bg-gold-100/60 p-10 text-center">
+        <MessageCircle className="mx-auto h-12 w-12 text-pine-800" />
+        <h3 className="mt-4 font-display text-2xl font-medium text-pine-950">WhatsApp was blocked by your browser</h3>
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink-600">
-          Our team will connect with you shortly on your submitted details. For an immediate conversation, reach us on{" "}
+          Your details are ready — tap below to open WhatsApp and send your enquiry to{" "}
           <a href={COMPANY.phoneHref} className="font-semibold text-pine-800 underline">
             {COMPANY.phoneDisplay}
           </a>
@@ -76,13 +103,48 @@ export default function EnquiryForm({ fields, context, submitLabel = "Send Enqui
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           <a
-            href={COMPANY.whatsapp}
+            href={waLink}
             target="_blank"
             rel="noreferrer"
-            className="rounded-full bg-pine-800 px-6 py-2.5 text-sm font-semibold text-cream hover:bg-pine-900"
+            className="rounded-full bg-[#1FA855] px-8 py-3 text-sm font-semibold text-white hover:brightness-95"
           >
-            Continue on WhatsApp
+            Tap to Open WhatsApp
           </a>
+          <button
+            type="button"
+            onClick={() => setStatus("idle")}
+            className="rounded-full border border-pine-800/30 px-6 py-3 text-sm font-semibold text-pine-800 hover:bg-pine-800 hover:text-cream"
+          >
+            Back to Form
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (status === "sent") {
+    return (
+      <div className="rounded-3xl border border-pine-700/20 bg-pine-50 p-10 text-center">
+        <CheckCircle2 className="mx-auto h-12 w-12 text-pine-700" />
+        <h3 className="mt-4 font-display text-2xl font-medium text-pine-950">Enquiry sent to WhatsApp</h3>
+        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink-600">
+          Your complete enquiry has opened in WhatsApp to{" "}
+          <a href={COMPANY.phoneHref} className="font-semibold text-pine-800 underline">
+            {COMPANY.phoneDisplay}
+          </a>{" "}
+          — just press send there. Our team will connect with you shortly.
+        </p>
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          {waLink && (
+            <a
+              href={waLink}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full bg-[#1FA855] px-6 py-2.5 text-sm font-semibold text-white hover:brightness-95"
+            >
+              Open WhatsApp Again
+            </a>
+          )}
           <button
             type="button"
             onClick={() => setStatus("idle")}
@@ -142,26 +204,21 @@ export default function EnquiryForm({ fields, context, submitLabel = "Send Enqui
         <button
           type="submit"
           disabled={status === "sending"}
-          className="inline-flex items-center gap-2 rounded-full bg-pine-800 px-8 py-3.5 text-sm font-semibold text-cream transition-all hover:bg-pine-900 disabled:opacity-70"
+          className="inline-flex items-center gap-2 rounded-full bg-[#1FA855] px-8 py-3.5 text-sm font-semibold text-white transition-all hover:brightness-95 disabled:opacity-70"
         >
           {status === "sending" ? (
             <>
-              <Loader2 className="h-4 w-4 animate-spin" /> Sending…
+              <Loader2 className="h-4 w-4 animate-spin" /> Opening WhatsApp…
             </>
           ) : (
             <>
-              <Send className="h-4 w-4" /> {submitLabel}
+              <MessageCircle className="h-4 w-4" /> {submitLabel} via WhatsApp
             </>
           )}
         </button>
-        <a
-          href={buildWhatsAppLink(context, values)}
-          target="_blank"
-          rel="noreferrer"
-          className="text-sm font-semibold text-pine-700 underline-offset-4 hover:underline"
-        >
-          Or send these details over WhatsApp
-        </a>
+        <span className="inline-flex items-center gap-1.5 text-xs text-ink-500">
+          <Send className="h-3.5 w-3.5" /> Submitting opens WhatsApp with your complete details pre-filled.
+        </span>
       </div>
     </form>
   );

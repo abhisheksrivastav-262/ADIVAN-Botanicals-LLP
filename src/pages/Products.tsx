@@ -238,7 +238,11 @@ export function ProductDetail() {
         <div className="mx-auto max-w-3xl px-5 sm:px-8">
           <SectionHead eyebrow="Product enquiry" title={<>Enquire about <span className="text-pine-700 italic">{product.name}</span></>} align="center" />
           <Reveal delay={120} className="mt-10 rounded-[2rem] border border-pine-800/10 bg-ivory p-7 sm:p-10">
-            <EnquiryForm fields={productFields(product.name)} context={`Product Enquiry (${product.name})`} />
+            <EnquiryForm
+              fields={productFields(product.name)}
+              defaults={{ Product: product.name }}
+              context={`Product Enquiry (${product.name})`}
+            />
           </Reveal>
         </div>
       </section>
