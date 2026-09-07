@@ -8,7 +8,8 @@ export function Contact() {
   useSeo("Contact — Adivan Botanicals LLP", "Reach Adivan Botanicals LLP: +91 9977963311, Burhar, Shahdol, Madhya Pradesh. General, product, manufacturing and distribution enquiries welcome.");
   const cards = [
     { icon: Phone, label: "Mobile", value: COMPANY.phoneDisplay, href: COMPANY.phoneHref },
-    { icon: Mail, label: "Email", value: COMPANY.email, href: `mailto:${COMPANY.email}` },
+    { icon: Mail, label: "Email", value: COMPANY.email2, href: `mailto:${COMPANY.email2}` },
+    { icon: Mail, label: "Alternate Email", value: COMPANY.email, href: `mailto:${COMPANY.email}` },
     { icon: MessageCircle, label: "WhatsApp", value: "Chat with us instantly", href: COMPANY.whatsapp },
   ];
   return (
@@ -23,7 +24,7 @@ export function Contact() {
         intro={COMPANY.closingTagline}
       />
       <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-24">
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {cards.map((c, i) => (
             <Reveal key={c.label} delay={i * 100}>
               <a

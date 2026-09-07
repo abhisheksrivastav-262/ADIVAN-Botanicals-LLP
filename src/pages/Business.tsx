@@ -157,7 +157,8 @@ export function Partners() {
             />
             <div className="mt-6 space-y-3 text-sm text-ink-600">
               <p className="flex items-center gap-2"><Phone className="h-4 w-4 text-pine-700" /> <a href={COMPANY.phoneHref} className="font-semibold text-pine-800">{COMPANY.phoneDisplay}</a></p>
-              <p className="flex items-center gap-2"><Mail className="h-4 w-4 text-pine-700" /> <a href={`mailto:${COMPANY.email}`} className="font-semibold text-pine-800">{COMPANY.email}</a></p>
+              <p className="flex items-center gap-2"><Mail className="h-4 w-4 text-pine-700" /> <a href={`mailto:${COMPANY.email2}`} className="font-semibold break-all text-pine-800">{COMPANY.email2}</a></p>
+              <p className="flex items-center gap-2"><Mail className="h-4 w-4 text-pine-700" /> <a href={`mailto:${COMPANY.email}`} className="font-semibold break-all text-pine-800">{COMPANY.email}</a></p>
             </div>
           </Reveal>
           <Reveal delay={120} className="rounded-[2rem] border border-pine-800/10 bg-cream p-7 sm:p-10">

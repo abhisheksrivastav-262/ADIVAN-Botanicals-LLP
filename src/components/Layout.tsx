@@ -282,6 +282,11 @@ function Footer() {
                 </a>
               </li>
               <li>
+                <a href={`mailto:${COMPANY.email2}`} className="flex items-start gap-3 break-all hover:text-gold-200">
+                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" /> {COMPANY.email2}
+                </a>
+              </li>
+              <li>
                 <a href={`mailto:${COMPANY.email}`} className="flex items-start gap-3 break-all hover:text-gold-200">
                   <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" /> {COMPANY.email}
                 </a>

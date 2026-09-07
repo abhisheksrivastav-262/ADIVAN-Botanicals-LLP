@@ -9,6 +9,7 @@ export const COMPANY = {
     "https://wa.me/919977963311?text=" +
     encodeURIComponent("Namaste! I would like to enquire about Adivan Botanicals products."),
   email: "narayan3311patel@gmail.com",
+  email2: "adivanbatanicalsllp@gmail.com",
   addressLines: [
     "Plot No. 1401/1, Amlai Road,",
     "Purani Basti, Ward No. 06,",
