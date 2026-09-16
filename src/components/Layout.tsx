@@ -261,7 +261,6 @@ function Footer() {
                 ["All Products", "/products"],
                 ["Hair Care", "/hair-care"],
                 ["Wellness Syrups", "/syrups"],
-                ["Nutrition & Wellness", "/nutrition"],
                 ["Partner With Us", "/manufacturing-partners"],
                 ["Contact", "/contact"],
               ].map(([label, path]) => (

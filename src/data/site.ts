@@ -49,7 +49,6 @@ export const NAV_LINKS: NavLink[] = [
       { label: "All Products", path: "/products" },
       { label: "Hair Care", path: "/hair-care" },
       { label: "Wellness Syrups", path: "/syrups" },
-      { label: "Nutrition & Wellness", path: "/nutrition" },
     ],
   },
   { label: "Quality", path: "/quality" },

@@ -30,7 +30,7 @@ import {
 const TRUST_WORDS = ["Quality", "Transparency", "Ayurveda", "Trust"];
 
 function Hero() {
-  const featured = ["hair-grow-oil", "hair-pure-shampoo", "hair-grow-serum"]
+  const featured = ["hair-grow-oil", "uterine-syrup", "adilyco-syrup"]
     .map((s) => productBySlug(s))
     .filter((p) => p !== undefined);
 
@@ -172,12 +172,12 @@ function Intro() {
 
 function Featured() {
   const slugs = [
-    "hair-pure-shampoo",
-    "hair-conditioner",
-    "hair-grow-tablets",
-    "hair-grow-shampoo",
-    "hair-grow-serum",
     "hair-grow-oil",
+    "uterine-syrup",
+    "multivitamin-syrup",
+    "liver-3x-syrup",
+    "iron-syrup",
+    "adilyco-syrup",
   ];
   const items = slugs.map((s) => productBySlug(s)).filter((p) => p !== undefined);
   return (
@@ -188,14 +188,14 @@ function Featured() {
             eyebrow="Featured products"
             title={
               <>
-                The Adivan <span className="text-pine-700 italic">hair-care</span> portfolio
+                Featured <span className="text-pine-700 italic">products</span> from Adivan
               </>
             }
-            intro="Six formulations spanning cleansing, conditioning, serum, oil and tablets — presented in professional brand packaging."
+            intro="Hair oil and Ayurvedic wellness syrups — presented in professional brand packaging with MRP on pack."
           />
           <Reveal delay={120}>
             <Link to="/products" className="inline-flex items-center gap-2 text-sm font-semibold text-pine-800 hover:text-pine-900">
-              View all 17 products <ArrowRight className="h-4 w-4" />
+              View all 11 products <ArrowRight className="h-4 w-4" />
             </Link>
           </Reveal>
         </div>
@@ -214,23 +214,16 @@ function Categories() {
     {
       path: "/hair-care",
       title: "Hair Care",
-      text: "Hair wellness and care portfolio — shampoo, conditioner, serum, oil and tablets.",
-      count: "6 products",
+      text: "Hair wellness offering — Adivan Hair Grow Oil.",
+      count: "1 product",
       icon: Sprout,
     },
     {
       path: "/syrups",
       title: "Ayurvedic & Wellness Syrups",
-      text: "Uterine, Multivitamin, Liver 3X, Liver, Iron, Enzyme, Adilyco, Acidity, Piles and Stone syrups.",
+      text: "Uterine, Multivitamin, Liver 3X, Liver, Iron, Enzyme, Adilyco, Acidity and Appitizer syrups.",
       count: "10 products",
       icon: FlaskConical,
-    },
-    {
-      path: "/nutrition",
-      title: "Nutrition & Wellness",
-      text: "Adivan Nutrition — the brand's nutrition-oriented wellness offering.",
-      count: "1 product",
-      icon: ShieldCheck,
     },
   ];
   return (
@@ -244,7 +237,7 @@ function Categories() {
         }
         align="center"
       />
-      <div className="mt-12 grid gap-6 lg:grid-cols-3">
+      <div className="mt-12 grid gap-6 lg:grid-cols-2">
         {tiles.map((t, i) => (
           <Reveal key={t.path} delay={i * 120}>
             <Link
@@ -416,7 +409,7 @@ function BusinessStrip() {
 export default function Home() {
   useSeo(
     "Adivan Botanicals LLP — From Tribal Wisdom to Modern Wellness",
-    "Adivan Botanicals LLP is an Indian Ayurvedic and herbal wellness brand: quality-oriented hair-care, wellness syrups and nutrition products."
+    "Adivan Botanicals LLP is an Indian Ayurvedic and herbal wellness brand: quality-oriented hair-care and wellness syrups."
   );
   return (
     <>

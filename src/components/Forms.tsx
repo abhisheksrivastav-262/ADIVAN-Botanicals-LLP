@@ -257,7 +257,7 @@ export const MANUFACTURING_FIELDS: FieldDef[] = [
     name: "category",
     label: "Product Category",
     type: "select",
-    options: ["Hair Care", "Ayurvedic & Wellness Syrups", "Nutrition & Wellness", "Other"],
+    options: ["Hair Care", "Ayurvedic & Wellness Syrups", "Other"],
     placeholder: "Select a category",
     required: true,
   },

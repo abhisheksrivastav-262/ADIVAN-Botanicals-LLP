@@ -35,7 +35,7 @@ export function About() {
     { icon: Sprout, title: "Traditional Ayurvedic Knowledge", text: "Wellness orientation rooted in India's Ayurvedic heritage and tribal botanical wisdom." },
     { icon: BadgeCheck, title: "Modern Quality Standards", text: "Quality-oriented sourcing, coordinated manufacturing and batch-to-batch consistency." },
     { icon: Package, title: "Professional Branding", text: "Thoughtful packaging, clear product information and responsible communication." },
-    { icon: Repeat, title: "Evolving Customer Needs", text: "A portfolio shaped around real customer needs — hair care, syrups and nutrition." },
+    { icon: Repeat, title: "Evolving Customer Needs", text: "A portfolio shaped around real customer needs — hair care and wellness syrups." },
   ];
   const focus = [
     { icon: FlaskConical, title: "Product Development", text: "Concepts and formulations developed with quality requirements defined upfront." },

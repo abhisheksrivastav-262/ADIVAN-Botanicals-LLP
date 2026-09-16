@@ -195,7 +195,7 @@ export function ProductImage({
     <div className={cn("pack-frame h-full w-full bg-cream", className)}>
       <img
         src={product.image}
-        alt={`${product.name} — actual Adivan Botanicals pack, ${product.packSize}`}
+        alt={`${product.name} — actual Adivan Botanicals pack, ${product.packSize}, MRP ${product.mrp}`}
         loading={eager ? "eager" : "lazy"}
         onError={() => setFailed(true)}
         className="h-full w-full"
@@ -223,6 +223,9 @@ export function ProductCard({ product, delay = 0 }: { product: Product; delay?: 
             {product.name}
           </h3>
           <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-600">{product.tagline}</p>
+          <p className="mt-3 text-sm font-bold text-pine-800">
+            MRP {product.mrp} <span className="font-normal text-ink-500">(Incl. of all taxes)</span>
+          </p>
           <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-pine-700">
             View Product
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />

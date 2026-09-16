@@ -17,7 +17,7 @@ import EnquiryForm, { productFields } from "../components/Forms";
 
 /* ============ ALL PRODUCTS ============ */
 export function ProductsIndex() {
-  useSeo("Products — Adivan Botanicals LLP", "Explore the Adivan Botanicals portfolio: hair care, Ayurvedic & wellness syrups, and nutrition & wellness products.");
+  useSeo("Products — Adivan Botanicals LLP", "Explore the Adivan Botanicals portfolio: hair care and Ayurvedic & wellness syrups.");
   return (
     <>
       <PageHero
@@ -27,7 +27,7 @@ export function ProductsIndex() {
             Products crafted with <span className="text-gold-200 italic">intent</span>
           </>
         }
-        intro="Hair care, Ayurvedic & wellness syrups, and nutrition — 17 products under one quality promise. Refer to product pack for specific information."
+        intro="Hair care and Ayurvedic & wellness syrups — 11 products under one quality promise. Refer to product pack for specific information."
       />
       {CATEGORIES.map((cat, ci) => (
         <section key={cat.slug} className={ci % 2 === 1 ? "bg-parchment/60" : ""}>
@@ -94,9 +94,6 @@ export function HairCare() {
 export function Syrups() {
   return <CategoryPage slug="syrups" />;
 }
-export function Nutrition() {
-  return <CategoryPage slug="nutrition" />;
-}
 
 /* ============ PRODUCT DETAIL ============ */
 function Related({ current }: { current: Product }) {
@@ -133,7 +130,7 @@ export function ProductDetail() {
     );
   }
 
-  const catPath = product.category === "Hair Care" ? "/hair-care" : product.category === "Nutrition & Wellness" ? "/nutrition" : "/syrups";
+  const catPath = product.category === "Hair Care" ? "/hair-care" : "/syrups";
 
   return (
     <>
@@ -190,6 +187,10 @@ export function ProductDetail() {
                   <div>
                     <dt className="text-xs font-bold tracking-[0.18em] text-pine-700 uppercase">Pack size</dt>
                     <dd className="mt-1 font-semibold text-ink-900">{product.packSize}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs font-bold tracking-[0.18em] text-pine-700 uppercase">MRP (as printed)</dt>
+                    <dd className="mt-1 font-semibold text-ink-900">{product.mrp} <span className="font-normal text-ink-500">(Incl. of all taxes)</span></dd>
                   </div>
                   <div>
                     <dt className="text-xs font-bold tracking-[0.18em] text-pine-700 uppercase">Pack descriptor</dt>
