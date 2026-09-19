@@ -1,11 +1,11 @@
-export type ProductCategory = "Hair Care" | "Ayurvedic & Wellness Syrups";
+export type ProductCategory = "Hair Care" | "Ayurvedic & Wellness Syrups" | "Nutrition & Supplements";
 
 export interface Product {
   slug: string;
   name: string;
   category: ProductCategory;
   /** sub-folder under /public/products holding the product photo */
-  folder: "hair" | "syrups";
+  folder: "hair" | "syrups" | "nutrition";
   /** exact file of the product photo */
   image: string;
   /** MRP as printed on pack (incl. of all taxes) */
@@ -201,6 +201,40 @@ export const PRODUCTS: Product[] = [
     usage:
       "5–10 ml once or twice/thrice a day with lukewarm water, or as directed by the physician. Shake well before use (as printed on pack).",
   },
+  {
+    slug: "hair-grow-tablets",
+    name: "Hair Grow Tablets",
+    category: "Hair Care",
+    folder: "hair",
+    image: "/products/hair/hair-grow-tablets.jpeg",
+    mrp: "₹899",
+    tagline: "Biotin, Amino Acids, Minerals & Vitamins · 60 tablets · extra strength hair growth supplement.",
+    overview:
+      "Adivan Hair Grow Tablets is the tablet offering in the hair-care portfolio, presented as a Nutraceutical extra strength hair growth supplement that helps strengthen, stimulate and nourish hair and helps promote existing hair growth.",
+    packSize: "60 Tablets",
+    packLine: "Biotin, Amino Acids, Minerals & Vitamins — Extra Strength Hair Growth Supplement. Nutraceuticals.",
+    composition: "Biotin, Amino Acids, Minerals & Vitamins — full composition table printed on pack (as printed on pack).",
+    usage:
+      "Take 1–2 tablets twice a day after meal with lukewarm water, or as directed by the healthcare professional. Store in a cool, dry and dark place (as printed on pack).",
+    packWording: "Helps Strengthens, Stimulate & Nourishes — Helps Promotes Existing Hair Growth (as printed on pack).",
+  },
+  {
+    slug: "adivan-nutrition",
+    name: "Adivan Nutrition",
+    category: "Nutrition & Supplements",
+    folder: "nutrition",
+    image: "/products/nutrition/adivan-nutrition.jpeg",
+    mrp: "₹344",
+    tagline: "Co-Enzyme Q10, L-Carnitine, Multivitamin, Multimineral & Antioxidants · softgel capsules.",
+    overview:
+      "Adivan Nutrition Softgel Capsules is the nutrition offering in the portfolio, presented as Co-Enzyme Q10, L-Carnitine L-Tartrate, Multivitamin, Multimineral & Antioxidants Softgel Capsules.",
+    packSize: "10 x 1 x 10 Softgel Capsules (1 x 10 per strip)",
+    packLine:
+      "Co-Enzyme Q10, L-Carnitine L-Tartrate, Multivitamin, Multimineral & Antioxidants Softgel Capsules.",
+    composition: "Co-Enzyme Q10, L-Carnitine L-Tartrate, Multivitamin, Multimineral & Antioxidants — full composition table printed on pack.",
+    usage:
+      "As directed by the physician. Do not exceed the recommended daily usage. Store in a cool, dry and dark place (as printed on pack).",
+  },
 ];
 
 export const PACK_NOTE_TEXT =
@@ -223,8 +257,8 @@ export const CATEGORIES: CategoryInfo[] = [
     slug: "hair-care",
     path: "/hair-care",
     title: "Hair Care",
-    blurb: "Hair wellness offering — Adivan Hair Grow Oil.",
-    productSlugs: ["hair-grow-oil"],
+    blurb: "Hair wellness offerings — Adivan Hair Grow Oil and Hair Grow Tablets.",
+    productSlugs: ["hair-grow-oil", "hair-grow-tablets"],
   },
   {
     slug: "syrups",
@@ -243,6 +277,13 @@ export const CATEGORIES: CategoryInfo[] = [
       "appitizer-syrup",
       "adilyco-syrup-pack-2",
     ],
+  },
+  {
+    slug: "nutrition",
+    path: "/nutrition",
+    title: "Nutrition & Supplements",
+    blurb: "Targeted nutrition and supplement offerings — Adivan Nutrition Softgel Capsules.",
+    productSlugs: ["adivan-nutrition"],
   },
 ];
 

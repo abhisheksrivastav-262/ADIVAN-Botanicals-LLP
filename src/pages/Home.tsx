@@ -11,6 +11,7 @@ import {
   Truck,
   Phone,
   CheckCircle2,
+  Pill,
 } from "lucide-react";
 import { COMPANY, MANUFACTURING_STEPS } from "../data/site";
 import { productBySlug } from "../data/products";
@@ -195,7 +196,7 @@ function Featured() {
           />
           <Reveal delay={120}>
             <Link to="/products" className="inline-flex items-center gap-2 text-sm font-semibold text-pine-800 hover:text-pine-900">
-              View all 11 products <ArrowRight className="h-4 w-4" />
+              View all 13 products <ArrowRight className="h-4 w-4" />
             </Link>
           </Reveal>
         </div>
@@ -214,8 +215,8 @@ function Categories() {
     {
       path: "/hair-care",
       title: "Hair Care",
-      text: "Hair wellness offering — Adivan Hair Grow Oil.",
-      count: "1 product",
+      text: "Hair wellness offerings — Adivan Hair Grow Oil and Hair Grow Tablets.",
+      count: "2 products",
       icon: Sprout,
     },
     {
@@ -224,6 +225,13 @@ function Categories() {
       text: "Uterine, Multivitamin, Liver 3X, Liver, Iron, Enzyme, Adilyco, Acidity and Appitizer syrups.",
       count: "10 products",
       icon: FlaskConical,
+    },
+    {
+      path: "/nutrition",
+      title: "Nutrition & Supplements",
+      text: "Targeted nutrition — Adivan Nutrition Softgel Capsules with Co-Enzyme Q10 and multivitamins.",
+      count: "1 product",
+      icon: Pill,
     },
   ];
   return (
@@ -237,7 +245,7 @@ function Categories() {
         }
         align="center"
       />
-      <div className="mt-12 grid gap-6 lg:grid-cols-2">
+      <div className="mt-12 grid gap-6 lg:grid-cols-3">
         {tiles.map((t, i) => (
           <Reveal key={t.path} delay={i * 120}>
             <Link

@@ -17,7 +17,7 @@ import EnquiryForm, { productFields } from "../components/Forms";
 
 /* ============ ALL PRODUCTS ============ */
 export function ProductsIndex() {
-  useSeo("Products — Adivan Botanicals LLP", "Explore the Adivan Botanicals portfolio: hair care and Ayurvedic & wellness syrups.");
+  useSeo("Products — Adivan Botanicals LLP", "Explore the Adivan Botanicals portfolio: hair care, Ayurvedic & wellness syrups and nutrition supplements.");
   return (
     <>
       <PageHero
@@ -27,7 +27,7 @@ export function ProductsIndex() {
             Products crafted with <span className="text-gold-200 italic">intent</span>
           </>
         }
-        intro="Hair care and Ayurvedic & wellness syrups — 11 products under one quality promise. Refer to product pack for specific information."
+        intro="Hair care, Ayurvedic & wellness syrups and nutrition supplements — 13 products under one quality promise. Refer to product pack for specific information."
       />
       {CATEGORIES.map((cat, ci) => (
         <section key={cat.slug} className={ci % 2 === 1 ? "bg-parchment/60" : ""}>
@@ -94,6 +94,9 @@ export function HairCare() {
 export function Syrups() {
   return <CategoryPage slug="syrups" />;
 }
+export function Nutrition() {
+  return <CategoryPage slug="nutrition" />;
+}
 
 /* ============ PRODUCT DETAIL ============ */
 function Related({ current }: { current: Product }) {
@@ -130,7 +133,7 @@ export function ProductDetail() {
     );
   }
 
-  const catPath = product.category === "Hair Care" ? "/hair-care" : "/syrups";
+  const catPath = product.category === "Hair Care" ? "/hair-care" : product.category === "Nutrition & Supplements" ? "/nutrition" : "/syrups";
 
   return (
     <>
